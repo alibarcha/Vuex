@@ -2,8 +2,6 @@ import Vue from "vue";
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
-
-
 export const store = new Vuex.Store({
     state:{
        
@@ -13,11 +11,32 @@ export const store = new Vuex.Store({
             {name:'Apple',price:40},
             {name:'Orange',price:60},
             {name:'Mango',price:80},
-          ]
-        
-    },
-    mutations:{
-        // functions inside mutation
+          ],
+        //   string data
+          productOne:'product list One',
+          productTwo:'product list Two',
 
+          lName:'ali',
+          fName:'barcha',
+
+          
+    },
+    getters:{
+      // functions inside getters
+
+      saleProducts:state=>{
+        var saleProducts=state.products.map(products=>{
+          return {
+            name:"**"+products.name+"**",
+            price:products.price/2
+          }
+        });
+        return saleProducts
+      }
+     
     }
+ 
+
+ 
+   
 })

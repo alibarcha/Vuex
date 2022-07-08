@@ -1,12 +1,13 @@
 <template>
     <div id="product-list-two">
-        <h2>product list two</h2>
+        <h2>{{product_2}}</h2>
          <ul>
-            <li v-for="product in products" v-bind:key="product.id">
+            <li v-for="product in  saleProducts" v-bind:key="product.id">
                 <span class="name">{{product.name}}</span>
                 <span class="price"> £ {{ product.price }} </span>
             </li>
         </ul>
+      
     </div>
 </template>
 
@@ -17,6 +18,13 @@ export default {
     computed:{
         products(){
             return this.$store.state.products
+        },
+        // sale product
+        saleProducts:function(){
+            return this.$store.getters.saleProducts
+        },
+        product_2:function(){
+            return this.$store.state.productTwo
         }
     }
 

@@ -1,12 +1,13 @@
 <template>
     <div id="product-list-one">
-        <h2>product list one</h2>
+        <h2>{{product_1}}</h2>
         <ul>
-            <li v-for="product in products" v-bind:key="product.id">
+            <li v-for="product in saleProducts" v-bind:key="product.id">
                 <span class="name">{{product.name}}</span>
                 <span class="price"> £ {{ product.price }} </span>
             </li>
         </ul>
+    
     </div>
 </template>
 
@@ -14,10 +15,22 @@
 export default {
     name:'ProductListOne',
     // props:['products'],
+        // in computed accept store data
     computed:{
         products(){
             return this.$store.state.products
-        }
+        },
+
+        // sale products
+        saleProducts(){
+          return this.$store.getters.saleProducts
+
+        },
+
+        product_1:function(){
+            return this.$store.state.productOne
+        },
+       
     }
 
 }
@@ -29,7 +42,6 @@ export default {
     box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
     margin-bottom: 30px;
     padding: 10px 20px;
-
 }
 #product-list-one ul{
     padding: 0;
