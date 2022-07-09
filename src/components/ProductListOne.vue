@@ -7,19 +7,28 @@
                 <span class="price"> £ {{ product.price }} </span>
             </li>
         </ul>
-    
+     
+        <button @click="reducePrice(4)">Reduce price</button>
     </div>
 </template>
 
 <script>
+import {mapActions} from  'vuex'
+import {mapGetters} from  'vuex'
 export default {
     name:'ProductListOne',
+  
     // props:['products'],
         // in computed accept store data
     computed:{
         products(){
             return this.$store.state.products
         },
+        ...mapGetters([
+            'saleproducts',
+            
+            
+        ]),
 
         // sale products
         saleProducts(){
@@ -31,8 +40,24 @@ export default {
             return this.$store.state.productOne
         },
        
-    }
+    },
+    methods:{
+        // reducePrice:function(){
+        //     this.$store.state.products.forEach(function(product) {
+        //         product.price -=1 
+        //     });
+        // }
+        ...mapActions([
+            'reducePrice'
+        ]),
 
+        reducePrice:function(amount){
+            // this.$store.commit('reducePrice')
+            this.$store.dispatch('reducePrice',amount)
+        }
+
+    }
+  
 }
 </script>
 

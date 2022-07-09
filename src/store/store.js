@@ -23,20 +23,54 @@ export const store = new Vuex.Store({
     },
     getters:{
       // functions inside getters
-
-      saleProducts:state=>{
-        var saleProducts=state.products.map(products=>{
+        // using arroy,fat function
+      saleProducts:(state)=>{
+        var saleProducts=state.products.map((products)=>{
           return {
             name:"**"+products.name+"**",
             price:products.price/2
           }
         });
         return saleProducts
-      }
+      },
+
+          // use narmal function
+      // saleProducts:function(state){
+      //   var saleProducts=state.products.map(function(products){
+      //     return {
+      //       name:'*'+products.name+"*",
+      //       price:products.price/2
+      //     }
+      //   });
+      //   return saleProducts
+
+      // }
      
+    },
+
+    mutations:{
+     
+      reducePrice:(state,payload)=>{
+          
+          state.products.forEach(product=>{
+              product.price -=payload;
+            })
+        
+      }
+    },
+
+    actions:{
+      reducePrice:(context,payload)=>{
+        setTimeout(() => {
+          context.commit('reducePrice',payload)
+        }, 3000);
+      }
     }
+
+  })
+ 
  
 
  
    
-})
+
